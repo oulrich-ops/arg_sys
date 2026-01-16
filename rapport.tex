@@ -1,0 +1,122 @@
+\documentclass{rapportECL}
+\usepackage{lipsum}
+\usepackage{svg}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{longtable}
+\usepackage{subcaption} 
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}   
+
+
+\title{Rapport ECL - Template} %Titre du fichier
+
+\begin{document}
+
+%----------- Informations du rapport ---------
+
+\titre{Modélisation de la Survie des Passagers du Titanic avec Naïve Bayes} %Titre du fichier .pdf
+\UE{Machine learning} %Nom de la UE
+\sujet{ Inférence bayesienne - Projet} %Nom du sujet
+
+%\enseignant{Elise \textsc{Bonzon}} %Nom de l'enseignant
+
+\eleves{
+		Kiswendsida \textsc{OUEDRAOGO} } %Nom des élèves
+
+%----------- Initialisation -------------------
+        
+\fairemarges %Afficher les marges
+\fairepagedegarde %Créer la page de garde
+\tabledematieres %Créer la table de matières
+
+%------------ Corps du rapport ----------------
+
+
+
+\section{Introduction} 
+Ce rapport présente un projet sur la mise en place d'un modèle de machin de classification. 
+Le Titanic, un paquebot de luxe britannique, a tragiquement coulé lors de son voyage inaugural en 1912, faisant de nombreuses victimes. 
+Dans ce projet, nous nous sommes intéressés à l'analyse des données des passagers du Titanic pour prédire la probabilité de 
+survie en fonction de différentes caractéristiques.
+
+\section{Objectifs}
+L'objectif principal de ce projet est de développer un modèle permettant de prédire la survie d'un passager en fonction de plusieurs 
+caractéristiques, en utilisant l'algorithme Naïve Bayes Gaussien de la bibliothèque \texttt{sklearn}. Un aspect supplémentaire de ce projet est la création d'une application web permettant une utilisation conviviale du modèle de prédiction. Plus spécifiquement, ce projet vise à :
+
+\begin{itemize}
+    \item Créer un modèle de prédiction de la survie des passagers.
+    \item Développer une interface web permettant à l'utilisateur de saisir les informations d'un passager et d'obtenir une prédiction.
+    \item Analyser les performances du modèle.
+\end{itemize}
+
+
+\section{Méthode utilisée} 
+
+
+\subsection{Préparation des données}
+Nous avons choisi d'utiliser l'algorithme Naïve Bayes Gaussien, qui est basé sur la règle de Bayes et qui s’inscrit dans le cadre de notre cours de Machine Learning sur l’inférence bayésienne. Ce modèle convient pour des problèmes de classification. La formule de Bayes utilisée pour la prédiction est la suivante :
+
+\[
+P(\text{Survived} | \text{Pclass}, \text{Sex}, \text{Age}, \text{Fare}) = \frac{P(\text{Pclass}, \text{Sex}, \text{Age}, \text{Fare} | \text{Survived}) \cdot P(\text{Survived})}{P(\text{Pclass}, \text{Sex}, \text{Age}, \text{Fare})}
+\]
+
+Le modèle a été entraîné à l'aide de la bibliothèque \texttt{sklearn} et exporté dans un fichier \texttt{pickle} pour une utilisation ultérieure dans l'application.
+
+\subsection{Développement de l'application}
+L'application a été développée rapidement avec le module Python \texttt{Streamlit}, permettant aux utilisateurs d'entrer les 
+caractéristiques d'un passager (classe, sexe, âge, tarif) via une interface web et d'obtenir une prédiction sur sa survie.
+
+\section{Expériences et Résultats}
+Le modèle a été évalué sur un jeu de données de test, issu d'une partition du dataset initial. Le score de précision obtenu pour les prédictions de survie est d'environ 80\%, ce qui peut être considéré comme relativement satisfaisant.
+
+\section{Discussion}
+Le modèle Naïve Bayes Gaussien a montré des performances satisfaisantes avec un score de 80\%. Cependant, l'utilisation de modèles plus complexes pourrait être envisagée afin d'améliorer la précision.  
+
+L'algorithme Naïve Bayes pourrait être comparé à des modèles plus avancés, tels que les forêts aléatoires (\textit{Random Forest}) ou les réseaux neuronaux, afin d'évaluer si une amélioration significative des performances peut être obtenue.
+
+\section{Conclusion}
+Ce projet nous a permis de mettre en pratique nos connaissances théoriques sur Naïve Bayes et de constater comment ces concepts peuvent être appliqués dans un contexte réel.
+
+
+
+
+\newpage
+
+\section*{Annexe : Exécution du projet en local}
+
+Les étapes pour exécuter le projet en local, hébergé sur GitHub :
+
+\subsection*{Cloner le repository GitHub}
+Ouvrez un terminal et clonez le repository à l'aide de la commande suivante :
+\begin{verbatim}
+git clone https://github.com/kiswayODG/machin_learning_project.git
+cd machin_learning_project/TITANIC_Naive_Bayes_Prediction
+\end{verbatim}
+
+\subsection*{Installer les dépendances}
+Le projet nécessite certaines bibliothèques Python. Pour installer toutes les dépendances, assurez-vous d'avoir un environnement virtuel activé (facultatif, mais recommandé) et exécutez la commande suivante :
+\begin{verbatim}
+pip install -r requirements.txt
+\end{verbatim}
+Cette commande installera toutes les bibliothèques listées dans le fichier \texttt{requirements.txt}, telles que \texttt{pandas}, \texttt{scikit-learn}, \texttt{streamlit}.
+
+\subsection*{Lancer l'application Streamlit}
+Une fois les dépendances installées, vous pouvez lancer l'application en utilisant Streamlit avec la commande suivante :
+\begin{verbatim}
+streamlit run app.py
+\end{verbatim}
+Cette commande ouvrira une nouvelle fenêtre dans votre navigateur où vous pourrez interagir avec l'application. L'interface vous permettra d'entrer les caractéristiques d'un passager (classe, sexe, âge, tarif) et de voir la prédiction de survie correspondante.
+
+\subsection*{Notebook d'entraînement du modèle}
+Le projet contient également un fichier \texttt{notebook.pdf} (et le fichier \texttt{NaiveBayes\_Titanic\_prediction.ipynb} au format Jupyter) qui montre le code utilisé pour entraîner le modèle. Vous pouvez ouvrir ce notebook pour examiner les étapes de prétraitement des données, d'entraînement du modèle et d'évaluation des performances.
+
+\subsection*{Modèle Pickle}
+Le modèle entraîné est exporté sous le fichier \texttt{titanic\_nbayes\_model.pkl}. Ce fichier est utilisé par l'application Streamlit pour charger le modèle et effectuer des prédictions en temps réel.
+
+
+
+
+
+
+\end{document}

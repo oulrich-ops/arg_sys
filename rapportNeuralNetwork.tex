@@ -1,0 +1,125 @@
+\documentclass{rapportECL}
+\usepackage{lipsum}
+\usepackage{svg}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{longtable}
+\usepackage{subcaption} 
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}   
+
+
+\title{Rapport ECL - Template} %Titre du fichier
+
+\begin{document}
+
+%----------- Informations du rapport ---------
+
+\titre{Modélisation de la Survie des Passagers du Titanic avec Réseaux de Neurones Perceptron multicouche} %Titre du fichier .pdf
+\UE{Machine learning} %Nom de la UE
+\sujet{ Réseaux de neurones - Projet} %Nom du sujet
+
+%\enseignant{Elise \textsc{Bonzon}} %Nom de l'enseignant
+
+\eleves{
+		Kiswendsida \textsc{OUEDRAOGO} } %Nom des élèves
+
+%----------- Initialisation -------------------
+        
+\fairemarges %Afficher les marges
+\fairepagedegarde %Créer la page de garde
+\tabledematieres %Créer la table de matières
+
+%------------ Corps du rapport ----------------
+
+
+
+\section{Introduction} 
+Ce rapport présente une modélisation de classification visant à prédire la survie des passagers du Titanic.
+
+Cette étude constitue une seconde approche du problème, puisque nous avions précédemment exploré une modélisation basée sur l’inférence bayésienne.
+
+L’objectif est à la fois de mettre en application les concepts théoriques étudiés en cours sur les réseaux de neurones et d’analyser les performances de ces deux modèles sur un même ensemble de données afin d’en évaluer les avantages et les limites respectifs.
+
+\section{Objectifs}
+L'objectif de cette étude est d'opter pour une autre approche pour la modélisation de ce problème, notemment une approche basé sur
+les réseaux de neurones et dans un deuxieme temps discuter sur les performances des deux approches.
+Plus précisément, nous visons à :
+\begin{itemize}
+    \item Concevoir et entraîner un modèle basé sur un réseau de neurones Perceptron afin d'évaluer ses performances dans la classification des passagers.
+    \item Optimiser les hyperparamètres du réseau pour améliorer sa précision.
+    \item Comparer les résultats obtenus avec ceux de l’étude précédente utilisant Naïve Bayes, en analysant les performances respectives des deux modèles en termes de précision et de perte.
+\end{itemize}
+
+
+\section{Méthode utilisée} 
+
+
+\subsection{Préparation des données}
+
+Pour mettre en place notre modèle, nous utiliserons les mêmes caractéristiques que celles employées précédemment avec l’approche bayésienne, à savoir :
+\begin{itemize}
+    \item Sexe, encodé en variable numérique avec one-hot encoding
+    \item Age
+    \item Tarif du billet (Fare)
+    \item Classe de voyage (Pclass)
+\end{itemize}
+
+La principale nouveauté ici est la standardisation des variables continues (Âge et Tarif) afin d’améliorer la convergence du modèle. En effet, ces variables présentent des écarts importants :
+\begin{itemize}
+    \item L’âge varie de 0,42 à 80 ans
+    \item Le prix du billet oscille entre 0 et 512 unités monétaires
+\end{itemize}
+Cette transformation permet de ramener les valeurs à une échelle comparable et d’optimiser l’apprentissage du modèle.
+
+Après plusieurs tests et ajustements, nous avons retenu un réseau de neurones avec deux couches cachées de 8 neurones chacune, 
+suivi d'une couche de sortie. 
+Chaque couche utilise la fonction d’activation sigmoïde et le modèle est entraîné avec un taux d’apprentissage (learning rate) de 0,01.
+
+Nous avons utilisé la Binary Cross-Entropy (BCE) comme fonction de perte, car elle est spécifiquement adaptée aux problèmes de classification binaire. 
+La BCE mesure la différence entre les probabilités prédites par le modèle et les vraies étiquettes (0 ou 1).
+
+\[
+\text{BCE} = - \frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) \vee (1 - y_i) \log(1 - \hat{y}_i) \right]
+\]
+
+où :
+\begin{itemize}
+    \item \( y_i \) est la classe réelle (0 ou 1),
+    \item \( \hat{y}_i \) est la probabilité prédite,
+    \item \( N \) est le nombre total d’exemples dans l’ensemble de données.
+\end{itemize}
+
+
+\section{Expériences et Résultats}
+Le réseau de neurones a obtenu une précision de 79 \%, avec une perte de 0,4192. Le modèle Naïve Bayes avait lui atteint une précision d’environ 80 \% sur l’ensemble de test.
+
+Bien que les performances soient similaires, le réseau de neurones a nécessité plus d’ajustements et un temps d'entraînement plus long. En revanche, il pourrait offir une flexibilité  pour améliorer ses performances avec  une meilleure ingénierie des caractéristiques.
+
+\section{Discussion}
+L’étude montre que bien que Naïve Bayes soit rapide et efficace pour ce type de données, un réseau de neurones bien ajusté peut obtenir des résultats comparables, voire meilleurs, avec des optimisations adéquates un peu plus poussées. L’ajout de nouvelles caractéristiques pourrait améliorer probablement la performance du modèle Perceptron.
+
+Dans ce sens, une exploration des outils d’Auto Feature Engineering pourrait être cruciale pour identifier automatiquement des caractéristiques pertinentes et optimiser davantage les performances du modèle.
+\section{Conclusion}
+Les réseaux de neurones se montrent performants pour la prédiction de la survie des passagers, à condition que les hyperparamètres soient optimisés et que les données soient bien prétraitées. Toutefois, pour un problème de classification simple comme celui du Titanic, Naïve Bayes reste un choix efficace et rapide. L'intégration d'autres techniques de Feature Engineering pourrait être une piste pour améliorer encore les résultats du réseau de neurones.
+
+
+
+\newpage
+
+\section*{Annexe : Accès au projet et au notebook}
+
+L’ensemble du projet, incluant le \textbf{notebook d'entraînement du modèle} et sa version PDF, est disponible sur GitHub à l’adresse suivante :  
+
+\begin{center}  
+\textbf{\url{https://github.com/kiswayODG/machin_learning_project/tree/main/TITANIC_Neural_Network_perceptron}}  
+\end{center}  
+
+Vous y trouverez :  
+\begin{itemize}  
+    \item Le \textbf{notebook Jupyter} utilisé pour l'entraînement du modèle.  
+    \item Le \textbf{fichier PDF} contenant une version exportée du notebook.  
+\end{itemize}  
+
+
+\end{document}
